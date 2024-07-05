@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>online digital marketing campaign</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="radio"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        select{
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        input[type="radio"] {
+            width: auto;
+        }
+        .radio-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Online Digital Marketing Customer Conversion Prediction</h1>
+    <div class="container">
+        <form action='/classify' method='POST'>
+            <div class="form-group">
+                <label>Gender of customer</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gen" value="Male"> Male</label>
+                    <label><input type="radio" name="gen" value="Female"> Female</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="chan">Campaign Channel</label>
+                <select id="chan" name="chan">
+                    <option value="Referral">Referral</option>
+                    <option value="PPC">PPC</option>
+                    <option value="Email">Email</option>
+                    <option value="SEO">SEO</option>
+                    <option value="Social Media">Social Media</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="camp">Campaign Type</label>
+                <select id="camp" name="camp">
+                    <option value="Conversion">Conversion</option>
+                    <option value="Awareness">Awareness</option>
+                    <option value="Consideration">Consideration</option>
+                    <option value="Retention">Retention</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ad">Amount spent on marketing campaign(usd)</label>
+                <input type="number" id="ad" name="ad" min=10 value="{{ request.form.ad if request.form else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="rate">Clickthrough Rate by customer</label>
+                <input type="number" id="rate" name="rate" min=0 step="0.1" max=1 value="{{ request.form.rate if request.form else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="page">Avg no. of pages visited/session by customer</label>
+                <input type="number" id="page" name="page" min=0 value="{{ request.form.page if request.form else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="time">Avg time spent on website/visit(mins) by customer</label>
+                <input type="number" id="time" name="time" min=0 value="{{ request.form.time if request.form else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="email">No. of times marketing emails were opened</label>
+                <input type="number" id="email" name="email" min=0 value="{{ request.form.email if request.form else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="eclick">No. of times links in marketing emails were clicked</label>
+                <input type="number" id="eclick" name="eclick" min=0 value="{{ request.form.eclick if request.form else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="purch">No. of previous puchases made by customer</label>
+                <input type="number" id="purch" name="purch" min=0 value="{{ request.form.purch if request.form else '' }}">
+            </div>
+            <div class="form-group">
+                <label for="points">Loyalty points accumulated by the customer</label>
+                <input type="number" id="points" name="points" min=0 value="{{ request.form.points if request.form else '' }}">
+            </div>
+            <div class="form-group">
+                <button type="submit" id="classification">Classify</button>
+            </div>
+        </form>
+        <h3>{{ text }}</h3>
+    </div>
+</body>
+</html>
